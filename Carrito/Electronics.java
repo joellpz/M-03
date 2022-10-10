@@ -1,4 +1,5 @@
 package Carrito;
 
-public class Electronics {
+public class Electronics extends Product {
+    int warrantyDays;
 }

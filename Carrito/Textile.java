@@ -1,4 +1,5 @@
 package Carrito;
 
-public class Textile {
+public class Textile extends Product {
+    String copmposition;
 }
