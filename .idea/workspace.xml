@@ -1,108 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="AutoImportSettings">
-    <option name="autoReloadType" value="SELECTIVE" />
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="037748b4-fbda-4e0e-805a-90cf39e520e5" name="Changes" comment="a">
-      <change afterPath="$PROJECT_DIR$/Carrito/Cart.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Carrito/Electronics.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Carrito/Food.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Carrito/Menu.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Carrito/Pay.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Carrito/Product.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Carrito/Textile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Carrito/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Carrito/Main.java" afterDir="false" />
+    <list default="true" id="bf1b75f5-2a69-4308-8cb4-088fc9de4c7f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
-  </component>
-  <component name="ProjectId" id="2FwgcJChr2NE964kN8UAZ2wRLsc" />
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
+  <component name="ProjectId" id="2Fwm1iPTLxVLTa8VhsYaCANouEM" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "last_opened_file_path": "/home/dam2a/Documents/M-03"
   }
 }]]></component>
-  <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="M-03" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="M-03" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="037748b4-fbda-4e0e-805a-90cf39e520e5" name="Changes" comment="" />
-      <created>1665408639114</created>
+      <changelist id="bf1b75f5-2a69-4308-8cb4-088fc9de4c7f" name="Changes" comment="" />
+      <created>1665411309320</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1665408639114</updated>
+      <updated>1665411309320</updated>
     </task>
-    <task id="LOCAL-00001" summary="a">
-      <created>1665408711654</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1665408711654</updated>
-    </task>
-    <task id="LOCAL-00002" summary="a">
-      <created>1665408813322</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1665408813322</updated>
-    </task>
-    <task id="LOCAL-00003" summary="a">
-      <created>1665409366330</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1665409366330</updated>
-    </task>
-    <task id="LOCAL-00004" summary="a">
-      <created>1665409395716</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1665409395716</updated>
-    </task>
-    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -115,10 +47,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="a" />
-    <option name="LAST_COMMIT_MESSAGE" value="a" />
   </component>
 </project>
