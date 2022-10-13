@@ -1,12 +1,17 @@
 package Carrito;
 
 public class Textile extends Product {
-    String copmposition;
-
-    public Textile(int price, int barCode, int name, String copmposition) {
+    String composition;
+    public void setComposition(String composition) {
+        this.composition = composition;
+    }
+    public Textile(){};
+    public Textile(int price, int barCode, String name, String copmposition) {
         this.price = price;
         this.barCode = barCode;
         this.name = name;
-        this.copmposition = copmposition;
+        this.composition = copmposition;
     }
+
+
 }

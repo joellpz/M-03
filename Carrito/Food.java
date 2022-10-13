@@ -7,14 +7,27 @@ import java.time.temporal.ChronoUnit;
 
 public class Food extends Product {
     LocalDate expirationDate;
+
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+    public void setExpirationDate(String expirationDate) {
+        this.expirationDate = LocalDate.parse(expirationDate,dtf);;
+    }
+
     long daysBetween;
-    public Food(int price, int name, int barCode, String limitDate) {
+
+    public Food(){};
+    public Food(float initPrice, String name, int barCode, String limitDate) {
         this.expirationDate = LocalDate.parse(limitDate,dtf);
-        daysBetween = ChronoUnit.DAYS.between(expirationDate, LocalDateTime.now());
-        this.price = (int) (price - price*(1/(daysBetween+1)) + (price * 0.1));
+        this.price = priceCalc(initPrice);
         this.name = name;
         this.barCode = barCode;
+    }
+
+    //@Override
+    private float priceCalc(float initPrice) {
+        daysBetween = ChronoUnit.DAYS.between(expirationDate, LocalDateTime.now());
+        return (initPrice - initPrice*(1/(daysBetween+1)) + (initPrice * 0.1f));
     }
 
     /*public static void main(String[] args) {
