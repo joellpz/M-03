@@ -8,9 +8,10 @@ import java.time.temporal.ChronoUnit;
 public class Food extends Product {
     LocalDate expirationDate;
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    long daysBetween;
     public Food(int price, int name, int barCode, String limitDate) {
         this.expirationDate = LocalDate.parse(limitDate,dtf);
-        long daysBetween = ChronoUnit.DAYS.between(expirationDate, LocalDateTime.now());
+        daysBetween = ChronoUnit.DAYS.between(expirationDate, LocalDateTime.now());
         this.price = (int) (price - price*(1/(daysBetween+1)) + (price * 0.1));
         this.name = name;
         this.barCode = barCode;
