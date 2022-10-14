@@ -2,15 +2,20 @@ package Carrito;
 
 import java.util.Objects;
 
-public /*abstract*/ class Product {
+public abstract /*abstract*/ class Product {
     protected float price;
     protected String name;
     protected int barCode;
 
-
-    public void setPrice(float price) {
-        this.price = price;
+    public float getPrice() {
+        return price;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public abstract void setPrice(float price);
 
     public void setName(String name) {
         this.name = name;

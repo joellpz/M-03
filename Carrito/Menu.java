@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 public class Menu {
     private static int opt;
-    private static Scanner sc = new Scanner(System.in);
-    private static Cart shoppingCart = new Cart();
+    private static final Scanner sc = new Scanner(System.in);
+    private static final Cart shoppingCart = new Cart();
 
     public static void shoppingMenu() {
         String[] options = {"Introduir Producte",
@@ -20,18 +20,17 @@ public class Menu {
                 if (i == options.length - 1) System.out.println("0. " + options[i]);
                 else System.out.println((i + 1) + ". " + options[i]);
             }
-            switch (sc.nextInt()) {
+            switch (opt = sc.nextInt()) {
                 case 1:
                     productMenu();
                     opt = 1;
                     break;
                 case 2:
-
+                    Pay.makeTicket(shoppingCart);
                     break;
                 case 3:
                     break;
                 case 0:
-
                     break;
                 default:
                     System.out.println("--- Mala Opció... ERROR --- ");
@@ -52,6 +51,7 @@ public class Menu {
                 else System.out.println((i + 1) + ". " + options[i]);
             }
             opt = sc.nextInt();
+            sc.nextLine();
             switch (opt) {
                 case 1:
                     System.out.println("-- " + options[0] + " --");

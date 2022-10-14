@@ -11,31 +11,25 @@ public class Food extends Product {
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public void setExpirationDate(String expirationDate) {
-        this.expirationDate = LocalDate.parse(expirationDate,dtf);;
+        this.expirationDate = LocalDate.parse(expirationDate, dtf);
     }
 
-    long daysBetween;
+    float daysBetween;
 
-    public Food(){};
-    public Food(float initPrice, String name, int barCode, String limitDate) {
-        this.expirationDate = LocalDate.parse(limitDate,dtf);
+    public Food() {
+    }
+
+    /*public Food(float initPrice, String name, int barCode, String limitDate) {
+        this.expirationDate = LocalDate.parse(limitDate, dtf);
         this.price = priceCalc(initPrice);
         this.name = name;
         this.barCode = barCode;
-    }
+    }*/
 
-    //@Override
-    private float priceCalc(float initPrice) {
+    @Override
+    public void setPrice(float price) {
         daysBetween = ChronoUnit.DAYS.between(expirationDate, LocalDateTime.now());
-        return (initPrice - initPrice*(1/(daysBetween+1)) + (initPrice * 0.1f));
+        this.price = (price - price * (1 / (daysBetween + 1)) + (price * 0.1f));
+
     }
-
-    /*public static void main(String[] args) {
-        String inputString1 = "23 01 1997";
-
-        LocalDate date1 = LocalDate.parse(inputString1, dtf);
-        LocalDateTime date2 = LocalDateTime.now();
-        long daysBetweSystem.out.println ("Days: " + daysBetween);
-    }en = ChronoUnit.DAYS.between(date1, date2);*/
-
 }
