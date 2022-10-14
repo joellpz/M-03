@@ -26,10 +26,15 @@ public class Food extends Product {
         this.barCode = barCode;
     }*/
 
+    //@Override
+    private float priceCalc(float initPrice) {
+        daysBetween = ChronoUnit.DAYS.between(expirationDate, LocalDateTime.now());
+        return (initPrice - initPrice * (1 / (daysBetween + 1)) + (initPrice * 0.1f));
+    }
+
+
     @Override
     public void setPrice(float price) {
-        daysBetween = ChronoUnit.DAYS.between(expirationDate, LocalDateTime.now());
-        this.price = (price - price * (1 / (daysBetween + 1)) + (price * 0.1f));
-
+        this.price = priceCalc(price);
     }
 }

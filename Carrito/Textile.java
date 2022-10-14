@@ -10,12 +10,16 @@ public class Textile extends Product {
     public Textile() {
     }
 
-    public Textile(int price, int barCode, String name, String copmposition) {
+    /*public Textile(int price, int barCode, String name, String copmposition) {
         this.price = price;
         this.barCode = barCode;
         this.name = name;
         this.composition = copmposition;
+    }*/
+
+
+    @Override
+    public void setPrice(float price) {
+        this.price = price;
     }
-
-
 }
