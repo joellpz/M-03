@@ -16,19 +16,6 @@ public class Cart {
         return shoppingCart;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Cart cart = (Cart) o;
-        return Objects.equals(shoppingCart, cart.shoppingCart);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(shoppingCart);
-    }
-
     public void showCart() {
 
     }

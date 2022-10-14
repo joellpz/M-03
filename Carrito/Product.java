@@ -1,5 +1,7 @@
 package Carrito;
 
+import java.util.Objects;
+
 public /*abstract*/ class Product {
     protected float price;
     protected String name;
@@ -16,6 +18,19 @@ public /*abstract*/ class Product {
 
     public void setBarCode(int barCode) {
         this.barCode = barCode;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return Float.compare(product.price, price) == 0 && barCode == product.barCode;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(price, barCode);
     }
 
     //private abstract void setPrice();
