@@ -6,6 +6,7 @@ public class Menu {
     private static int opt;
     private static Scanner sc = new Scanner(System.in);
     private static Cart shoppingCart = new Cart();
+
     public static void shoppingMenu() {
         String[] options = {"Introduir Producte",
                 "Passar per caixa",
@@ -25,6 +26,7 @@ public class Menu {
                     opt = 1;
                     break;
                 case 2:
+
                     break;
                 case 3:
                     break;
@@ -35,24 +37,24 @@ public class Menu {
                     System.out.println("--- Mala Opció... ERROR --- ");
                     break;
             }
-        }while (opt != 0);
+        } while (opt != 0);
     }
 
-    public static void productMenu(){
+    public static void productMenu() {
         String[] options = {"Alimentació",
                 "Téxtil",
                 "Electrònica",
                 "Tornar"};
-        do{
+        do {
             System.out.println("--- Tria una opció ---");
             for (int i = 0; i < options.length; i++) {
-                if (i == options.length-1) System.out.println("0. "+ options[i]);
-                else System.out.println((i+1) +". "+ options[i]);
+                if (i == options.length - 1) System.out.println("0. " + options[i]);
+                else System.out.println((i + 1) + ". " + options[i]);
             }
             opt = sc.nextInt();
-            switch (opt){
+            switch (opt) {
                 case 1:
-                    System.out.println("-- "+options[0]+" --");
+                    System.out.println("-- " + options[0] + " --");
                     Food eatingObject = new Food();
                     System.out.println("Introdueix la Data de Caducitat (dd/MM/yyyy):");
                     eatingObject.setExpirationDate(sc.nextLine());
@@ -60,7 +62,7 @@ public class Menu {
                     shoppingCart.addToCart(eatingObject);
                     break;
                 case 2:
-                    System.out.println("-- "+options[1]+" --");
+                    System.out.println("-- " + options[1] + " --");
                     Textile textileObject = new Textile();
                     System.out.println("Introdueix el Material:");
                     textileObject.setComposition(sc.nextLine());
@@ -68,7 +70,7 @@ public class Menu {
                     shoppingCart.addToCart(textileObject);
                     break;
                 case 3:
-                    System.out.println("-- "+options[2]+" --");
+                    System.out.println("-- " + options[2] + " --");
                     Electronics electroObject = new Electronics();
                     System.out.println("Introdueix la Garantia del Producte:");
                     electroObject.setWarrantyDays(sc.nextInt());
@@ -82,11 +84,11 @@ public class Menu {
                     System.out.println("--- Mala Opció... ERROR --- ");
                     break;
             }
-        }while(opt != 0);
+        } while (opt != 0);
 
     }
 
-    public static void setProductVariables(Product p){
+    public static void setProductVariables(Product p) {
         System.out.println("Nom del Producte:");
         p.setName(sc.nextLine());
         System.out.println("Preu:");

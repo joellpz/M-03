@@ -10,7 +10,9 @@ public class Electronics extends Product {
         this.warrantyDays = warrantyDays;
     }
 
-    public Electronics(){};
+    public Electronics() {
+    }
+
     public Electronics(int initPrice, int barCode, String name, int warrantyDays) {
         this.warrantyDays = warrantyDays;
         this.price = priceCalc(initPrice);
@@ -19,10 +21,10 @@ public class Electronics extends Product {
     }
 
     private float priceCalc(float initPrice) {
-        return (initPrice + initPrice*(warrantyDays/365)*0.1f);
+        return (initPrice + initPrice * (warrantyDays / 365) * 0.1f);
     }
 
     private void setPrice() {
-        this.price = (int) (price + price*(warrantyDays/365)*0.1);
+        this.price = (int) (price + price * (warrantyDays / 365) * 0.1);
     }
 }
