@@ -6,6 +6,7 @@ import java.util.*;
 
 public class Cart {
     private List<Product> shoppingCart = new ArrayList<>();
+    private Map<Product, Integer> noDupeBarCodeCart;
 
     public void addToCart(Product p) {
         shoppingCart.add(p);
@@ -21,17 +22,17 @@ public class Cart {
         System.out.println("--------------------- T I C K E T ---------------------");
         System.out.println("-------------------------------------------------------");
         System.out.println("*************** " + dtf.format(LocalDateTime.now()) + " - JoelMarket" + " ***************");
-        List<Product> sortedCart = getBarCodeDupes(shoppingCart);
-        for (Product p :) {
-            System.out.println("- " + p.getName() + " - " + products.get(p) +
-                    "u - " + p.getPrice() + "€ - Total:" +
-                    (p.getPrice() * products.get(p)) + "€ - ");
+        getBarCodeDupes(shoppingCart);
+        for (Product p : noDupeBarCodeCart.keySet()) {
+            System.out.println("- " + p.getBarCode() + " - " + noDupeBarCodeCart.get(p) +
+                    "u");
         }
     }
 
 
-    public List<Product> getBarCodeDupes(List<Product> cart) {
+    private Map<Product, Integer> getBarCodeDupes(List<Product> cart) {
         List<Product> sortedCart = cart;
+        Integer count = 0;
         Collections.sort(
                 sortedCart,
                 new Comparator<Product>() {
@@ -44,7 +45,15 @@ public class Cart {
                 }
         );
 
+        for (int i = 0; i < sortedCart.size() - 1; i++) {
+            if (sortedCart.get(i).getBarCode() == sortedCart.get(i + 1).getBarCode()) {
+                ++count;
+            }else{
+                noDupeBarCodeCart.put(sortedCart.get(i),count);
+                count = 0;
+            }
+        }
 
-        return sortedCart;
+        return noDupeBarCodeCart;
     }
 }
