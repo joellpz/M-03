@@ -7,6 +7,10 @@ public abstract /*abstract*/ class Product {
     protected String name;
     protected int barCode;
 
+    public int getBarCode() {
+        return barCode;
+    }
+
     public float getPrice() {
         return price;
     }
@@ -38,5 +42,10 @@ public abstract /*abstract*/ class Product {
         return Objects.hash(price, barCode);
     }
 
-    //private abstract void setPrice();
+    public boolean sameBarCode(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return barCode == product.barCode;
+    }
 }
