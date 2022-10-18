@@ -6,7 +6,7 @@ import java.util.*;
 
 public class Cart {
     private List<Product> shoppingCart = new ArrayList<>();
-    private Map<Product, Integer> noDupeBarCodeCart;
+    private final Map<Product, Integer> noDupeBarCodeCart = new HashMap<>();
 
     public void addToCart(Product p) {
         shoppingCart.add(p);
@@ -30,7 +30,7 @@ public class Cart {
     }
 
 
-    private Map<Product, Integer> getBarCodeDupes(List<Product> cart) {
+    private void getBarCodeDupes(List<Product> cart) {
         List<Product> sortedCart = cart;
         Integer count = 0;
         Collections.sort(
@@ -47,13 +47,13 @@ public class Cart {
 
         for (int i = 0; i < sortedCart.size() - 1; i++) {
             if (sortedCart.get(i).getBarCode() == sortedCart.get(i + 1).getBarCode()) {
+                System.out.println(sortedCart.get(i).getBarCode());
                 ++count;
-            }else{
-                noDupeBarCodeCart.put(sortedCart.get(i),count);
+            } else {
+                System.out.println("PONER");
+                noDupeBarCodeCart.put(sortedCart.get(i), count);
                 count = 0;
             }
         }
-
-        return noDupeBarCodeCart;
     }
 }

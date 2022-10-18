@@ -29,6 +29,7 @@ public class Menu {
                     Pay.makeTicket(shoppingCart);
                     break;
                 case 3:
+                    shoppingCart.showCart();
                     break;
                 case 0:
                     break;
