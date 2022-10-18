@@ -18,6 +18,7 @@ public class Pay {
                     (p.getPrice() * products.get(p)) + "€ - ");
         }
         cart.getShoppingCart().clear();
+        System.out.println();
     }
 
     private static Map<Product, Integer> getDupes(Cart cart) {
