@@ -61,17 +61,6 @@ public class Cart {
                     noDupeBarCodeCart.put(cart.get(i), count);
                 }
             }
-
-            /*if (sortedCart.get(i).getBarCode() == sortedCart.get(i + 1).getBarCode()) {
-                System.out.println(sortedCart.get(i).getBarCode());
-                ++count;
-            } else {
-                System.out.println(sortedCart.get(i).getBarCode());
-                ++count;
-                System.out.println("PONER");
-                noDupeBarCodeCart.put(sortedCart.get(i), count);
-                count = 0;
-            }*/
         }
     }
 }

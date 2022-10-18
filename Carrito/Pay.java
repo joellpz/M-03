@@ -6,6 +6,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Pay {
+    /*
+    * makeTicket: Funcion encargada de crear el formato del TICKET, enumerar y mostrar
+    * los productos introducidos al carro llamando a getDupes para recoger los elementos
+    * reperidos y mostrar el precio. Posteriomente borra el carro simulando el pago de
+    * los productos.
+    * */
     public static void makeTicket(Cart cart) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         System.out.println("--------------------- T I C K E T ---------------------");
@@ -21,6 +27,11 @@ public class Pay {
         System.out.println();
     }
 
+    /*
+    * getDupes: Encargada de enumerar los productos y contar los productos que se
+    * repiten. Introduciendo cada producto con el numero de repeticiones dentro de
+    * un mapa, comparando precio y el codigo de barras.
+    * */
     private static Map<Product, Integer> getDupes(Cart cart) {
         Map<Product, Integer> productCount = new HashMap<>();
         Integer count;

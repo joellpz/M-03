@@ -17,6 +17,10 @@ public class Electronics extends Product {
         this.name = name;
     }*/
 
+    /*
+    * priceCalc: Calcula el precio con el precio base dependiendo de la formula determinada
+    * dentro de esta funcion.
+    * */
     private float priceCalc(float initPrice) {
         return (initPrice + initPrice * (warrantyDays / 365) * 0.1f);
     }

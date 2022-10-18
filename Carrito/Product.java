@@ -29,6 +29,10 @@ public abstract /*abstract*/ class Product {
         this.barCode = barCode;
     }
 
+    /*
+    * equals: Compara el precio y el codigo de barras para determinar
+    * si dos productos son iguales.
+    * */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -40,12 +44,5 @@ public abstract /*abstract*/ class Product {
     @Override
     public int hashCode() {
         return Objects.hash(price, barCode);
-    }
-
-    public boolean sameBarCode(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Product product = (Product) o;
-        return barCode == product.barCode;
     }
 }
