@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class Cart {
-    private List<Product> shoppingCart = new ArrayList<>();
+    private final List<Product> shoppingCart = new ArrayList<>();
     private final Map<Product, Integer> noDupeBarCodeCart = new HashMap<>();
 
     public void addToCart(Product p) {
@@ -31,10 +31,12 @@ public class Cart {
 
 
     private void getBarCodeDupes(List<Product> cart) {
-        List<Product> sortedCart = cart;
         Integer count = 0;
+        cart.sort(Comparator.comparingInt(Product::getBarCode));
+
+        /* Without IntelliJ Corrections.
         Collections.sort(
-                sortedCart,
+                cart,
                 new Comparator<Product>() {
                     @Override
                     public int compare(Product p1, Product p2) {
@@ -44,16 +46,35 @@ public class Cart {
                     }
                 }
         );
+        */
+        for (int i = 0; i < cart.size() - 1; i++) {
+            if (cart.get(i).getBarCode() != cart.get(i + 1).getBarCode()) {
+                System.out.println(cart.get(i).getBarCode());
+                ++count;
+                System.out.println("PONER");
+                noDupeBarCodeCart.put(cart.get(i), count);
+                count = 0;
+            } else {
+                System.out.println(cart.get(i).getBarCode());
+                ++count;
+                if (i == cart.size() - 2) {
+                    System.out.println(cart.get(i).getBarCode());
+                    ++count;
+                    System.out.println("PONER");
+                    noDupeBarCodeCart.put(cart.get(i), count);
+                }
+            }
 
-        for (int i = 0; i < sortedCart.size() - 1; i++) {
-            if (sortedCart.get(i).getBarCode() == sortedCart.get(i + 1).getBarCode()) {
+            /*if (sortedCart.get(i).getBarCode() == sortedCart.get(i + 1).getBarCode()) {
                 System.out.println(sortedCart.get(i).getBarCode());
                 ++count;
             } else {
+                System.out.println(sortedCart.get(i).getBarCode());
+                ++count;
                 System.out.println("PONER");
                 noDupeBarCodeCart.put(sortedCart.get(i), count);
                 count = 0;
-            }
+            }*/
         }
     }
 }
