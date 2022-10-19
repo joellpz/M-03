@@ -17,13 +17,17 @@ public class Pay {
         System.out.println("--------------------- T I C K E T ---------------------");
         System.out.println("-------------------------------------------------------");
         System.out.println("*************** " + dtf.format(LocalDateTime.now()) + " - JoelMarket" + " ***************");
-        Map<Product, Integer> products = getDupes(cart);
-        for (Product p : products.keySet()) {
-            System.out.println("- " + p.getName() + " - " + products.get(p) +
-                    "u - " + p.getPrice() + "€ - Total:" +
-                    (p.getPrice() * products.get(p)) + "€ - ");
+        if (cart.getShoppingCart().size() == 0) {
+            System.out.println("- EL CARRET ESTÀ BUIT -");
+        }else {
+            Map<Product, Integer> products = getDupes(cart);
+            for (Product p : products.keySet()) {
+                System.out.println("- " + p.getName() + " - " + products.get(p) +
+                        "u - " + p.getPrice() + "€ - Total:" +
+                        (p.getPrice() * products.get(p)) + "€ - ");
+            }
+            cart.getShoppingCart().clear();
         }
-        cart.getShoppingCart().clear();
         System.out.println();
     }
 

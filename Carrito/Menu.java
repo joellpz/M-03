@@ -6,7 +6,9 @@ public class Menu {
     private static int opt;
     private static final Scanner sc = new Scanner(System.in);
     private static final Cart shoppingCart = new Cart();
-
+    private static final Textile textileObject = new Textile();
+    private static final Electronics electroObject = new Electronics();
+    private static final Food eatingObject = new Food();
     public static void shoppingMenu() {
         String[] options = {"Introduir Producte",
                 "Passar per caixa",
@@ -56,7 +58,6 @@ public class Menu {
             switch (opt) {
                 case 1:
                     System.out.println("-- " + options[0] + " --");
-                    Food eatingObject = new Food();
                     System.out.println("Introdueix la Data de Caducitat (dd/MM/yyyy):");
                     eatingObject.setExpirationDate(sc.nextLine());
                     setProductVariables(eatingObject);
@@ -64,7 +65,6 @@ public class Menu {
                     break;
                 case 2:
                     System.out.println("-- " + options[1] + " --");
-                    Textile textileObject = new Textile();
                     System.out.println("Introdueix el Material:");
                     textileObject.setComposition(sc.nextLine());
                     setProductVariables(textileObject);
@@ -72,8 +72,7 @@ public class Menu {
                     break;
                 case 3:
                     System.out.println("-- " + options[2] + " --");
-                    Electronics electroObject = new Electronics();
-                    System.out.println("Introdueix la Garantia del Producte:");
+                    System.out.println("Introdueix la Garantia del Producte (Dies):");
                     electroObject.setWarrantyDays(sc.nextInt());
                     sc.nextLine();
                     setProductVariables(electroObject);

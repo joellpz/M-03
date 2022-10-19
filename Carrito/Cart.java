@@ -9,8 +9,13 @@ public class Cart {
     private final Map<Product, Integer> noDupeBarCodeCart = new HashMap<>();
 
     public void addToCart(Product p) {
-        shoppingCart.add(p);
-        System.out.println("--- Producte \"" + p.name + "\" ha estat introduit al CARRO. ---");
+        if (shoppingCart.size() <= 100 ) {
+            shoppingCart.add(p);
+            System.out.println("--- Producte \"" + p.name + "\" ha estat introduit al CARRO. ---");
+        }else{
+            System.out.println("** ERROR, no pots agafar més productes **");
+        }
+
     }
 
     public List<Product> getShoppingCart() {
@@ -23,12 +28,16 @@ public class Cart {
         System.out.println("-------------------------------------------------------");
         System.out.println("*************** " + dtf.format(LocalDateTime.now()) + " - JoelMarket" + " ***************");
         getBarCodeDupes(shoppingCart);
-        for (Product p : noDupeBarCodeCart.keySet()) {
-            System.out.println("- " + p.getBarCode() + " - " + p.getName() + " - " + noDupeBarCodeCart.get(p) +
-                    "u");
+        if (shoppingCart.size() == 0) {
+            System.out.println("- EL CARRET ESTÀ BUIT -");
+        } else {
+            for (Product p : noDupeBarCodeCart.keySet()) {
+                System.out.println("- " + p.getBarCode() + " - " + p.getName() + " - " + noDupeBarCodeCart.get(p) +
+                        "u");
+            }
+            noDupeBarCodeCart.clear();
         }
         System.out.println();
-        noDupeBarCodeCart.clear();
     }
 
 
