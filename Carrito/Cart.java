@@ -22,6 +22,11 @@ public class Cart {
         return shoppingCart;
     }
 
+    /*
+    * showCart: Funció que formateja i mostra el carret en el moment que s'executa.
+    * Crida la funció auxiliar getBarCodeDupes per determinar la quantitat d'elements
+    * que es troben repetits segons un criteri en especific.
+    * */
     public void showCart() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         System.out.println("-------------------- T H E  C A R T -------------------");
@@ -41,6 +46,12 @@ public class Cart {
     }
 
 
+    /*
+    * getBarCodeDupes: Enviem un carro i comparem els seus BarCodes per
+    * determinar si es troben repetits. Posteriorment asignem els valor
+    * dessitjats a un Map<Producte, Integer> amb el producte en qÚestió
+    * i la quantitat de repeticions.
+    * */
     private void getBarCodeDupes(List<Product> cart) {
         Integer count = 0;
         cart.sort(Comparator.comparingInt(Product::getBarCode));

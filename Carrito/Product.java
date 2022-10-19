@@ -2,7 +2,7 @@ package Carrito;
 
 import java.util.Objects;
 
-public abstract /*abstract*/ class Product {
+public abstract class Product {
     protected float price;
     protected String name;
     protected int barCode;
@@ -30,8 +30,8 @@ public abstract /*abstract*/ class Product {
     }
 
     /*
-    * equals: Compara el precio y el codigo de barras para determinar
-    * si dos productos son iguales.
+    * equals: Compara el preu i el codi de barres per determinar
+    * si dos productes són iguals.
     * */
     @Override
     public boolean equals(Object o) {

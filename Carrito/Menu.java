@@ -9,6 +9,11 @@ public class Menu {
     private static final Textile textileObject = new Textile();
     private static final Electronics electroObject = new Electronics();
     private static final Food eatingObject = new Food();
+
+    /*
+    * shoppingMenu: Menu principal que mostra el primer grup d'opcions entre
+    * les que escollir el següent pas.
+    * */
     public static void shoppingMenu() {
         String[] options = {"Introduir Producte",
                 "Passar per caixa",
@@ -42,6 +47,10 @@ public class Menu {
         } while (opt != 0);
     }
 
+    /*
+    * productMenu: Menu que mostra la tipologia d'objecte que es pot escollir
+    * per introduïr al carret.
+    * */
     public static void productMenu() {
         String[] options = {"Alimentació",
                 "Téxtil",
@@ -88,6 +97,11 @@ public class Menu {
 
     }
 
+
+    /*
+    * setProductVariables: Sol·licita el valor de les variables comunes en les diferents
+    * tipologies dels productes.
+    * */
     public static void setProductVariables(Product p) {
         System.out.println("Nom del Producte:");
         p.setName(sc.nextLine());
