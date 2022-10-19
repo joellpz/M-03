@@ -1,11 +1,15 @@
 package Carrito;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Pay {
+    static DecimalFormat df = new DecimalFormat();
+
     /*
     * makeTicket: Funcion encargada de crear el formato del TICKET, enumerar y mostrar
     * los productos introducidos al carro llamando a getDupes para recoger los elementos
@@ -13,6 +17,7 @@ public class Pay {
     * los productos.
     * */
     public static void makeTicket(Cart cart) {
+        df.setMaximumFractionDigits(2);
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         System.out.println("--------------------- T I C K E T ---------------------");
         System.out.println("-------------------------------------------------------");
@@ -23,8 +28,8 @@ public class Pay {
             Map<Product, Integer> products = getDupes(cart);
             for (Product p : products.keySet()) {
                 System.out.println("- " + p.getName() + " - " + products.get(p) +
-                        "u - " + p.getPrice() + "€ - Total:" +
-                        (p.getPrice() * products.get(p)) + "€ - ");
+                        "u - " + df.format(p.getPrice()) + "€ - Total:" +
+                        df.format((p.getPrice() * products.get(p))) + "€ - ");
             }
             cart.getShoppingCart().clear();
         }

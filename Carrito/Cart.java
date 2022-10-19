@@ -9,7 +9,7 @@ public class Cart {
     private final Map<Product, Integer> noDupeBarCodeCart = new HashMap<>();
 
     public void addToCart(Product p) {
-        if (shoppingCart.size() <= 100 ) {
+        if (shoppingCart.size() < 100 ) {
             shoppingCart.add(p);
             System.out.println("--- Producte \"" + p.name + "\" ha estat introduit al CARRO. ---");
         }else{
