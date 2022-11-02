@@ -1,13 +1,14 @@
+package Multiplicacio;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.*;
 
 public class MultiplicaNoCallablesMain {
     public static final int MAX = 5;
 
     public static void main(String[] args) throws Exception {
-        ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(3);
-        List<MultiplicacioNoThreads> llistaTasques= new ArrayList<MultiplicacioNoThreads>();
+        //ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(3);
+        List<MultiplicacioNoThreads> llistaTasques= new ArrayList<>();
 
         for (int i = 0; i < MAX; i++) {
             MultiplicacioNoThreads calcula = new MultiplicacioNoThreads((int)(Math.random()*10), (int)(Math.random()*10));
@@ -17,8 +18,8 @@ public class MultiplicaNoCallablesMain {
         List<Integer> llistaResultats = new ArrayList<>();
 
         long temp1 = System.currentTimeMillis(); //agafem els milisegons de la data
-        for (int i = 0; i < llistaTasques.size(); i++) {
-            llistaResultats.add(llistaTasques.get(i).call());
+        for (MultiplicacioNoThreads llistaTasque : llistaTasques) {
+            llistaResultats.add(llistaTasque.call());
         }
 
         long temp2 = System.currentTimeMillis();  //tornem a capturar els milisegons per calcular quan ha trigat

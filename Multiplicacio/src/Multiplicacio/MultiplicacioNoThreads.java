@@ -1,7 +1,10 @@
+package Multiplicacio;
+
 import java.util.concurrent.Callable;
 
 public class MultiplicacioNoThreads implements Callable<Integer> {
-    private int op1, op2;
+    private final int op1;
+    private final int op2;
     public MultiplicacioNoThreads(int op1, int op2) {
         this.op1=op1;
         this.op2=op2;

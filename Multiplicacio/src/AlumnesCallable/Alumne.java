@@ -1,3 +1,5 @@
+package AlumnesCallable;
+
 import java.util.concurrent.Callable;
 
 public class Alumne implements Callable<Integer> {
@@ -16,8 +18,7 @@ public class Alumne implements Callable<Integer> {
             e.printStackTrace();
         }
         //nota de l'examen
-        int nota = (int) (Math.random()*10);
-        return nota;
+        return (int) (Math.random()*10);
     }
 
     public String getNom() {
@@ -30,7 +31,7 @@ public class Alumne implements Callable<Integer> {
 
 
     @Override
-    public Integer call() throws Exception {
+    public Integer call() {
         return Examinar();
     }
 }

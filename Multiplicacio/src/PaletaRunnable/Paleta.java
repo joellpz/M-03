@@ -1,3 +1,5 @@
+package PaletaRunnable;
+
 public class Paleta implements Runnable {
      String name;
      int numMaons;
