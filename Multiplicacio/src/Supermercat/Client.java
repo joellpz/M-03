@@ -10,9 +10,9 @@ import java.util.List;
 
 public class Client {
     private String Nom;
-    private List<Integer> carret;
+    private List<Float> carret;
 
-    public Client(String nom, List<Integer> carret) {
+    public Client(String nom, List<Float> carret) {
         this.carret = carret;
         Nom = nom;
     }
@@ -25,11 +25,11 @@ public class Client {
         Nom = nom;
     }
 
-    public List<Integer> getCarret() {
+    public List<Float> getCarret() {
         return carret;
     }
 
-    public void setCarret(List<Integer> carret) {
+    public void setCarret(List<Float> carret) {
         this.carret = carret;
     }
 }
