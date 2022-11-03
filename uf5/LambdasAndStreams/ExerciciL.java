@@ -139,15 +139,25 @@ public class ExerciciL {
 
         // 11 - Persones que tinguin una 'a' al seu nom
         System.out.println("\n11 Amb una 'A'");
-        llista_persones.forEach(persona -> System.out.println(persona.getNom().contains("a")));
+        llista_persones.stream()
+                        .filter(persona -> persona.getNom().contains("a"))
+                        .forEach(System.out::println);
+        //llista_persones.forEach(persona -> System.out.println(persona.getNom().contains("a")));
 
         //12 - Llistat de les dates de naixament + dos dies
         System.out.println("\n12 - dates amb dos dies més");
 
-        llista_persones.forEach(p -> System.out.println(p.getDataNaixament().plusDays(2)));
+        llista_persones.stream()
+                .map(p -> p.getDataNaixament().plusDays(2))
+                .forEach(System.out::println);
+        //llista_persones.forEach(p -> System.out.println(p.getDataNaixament().plusDays(2)));
 
         //13 - Rejovenir dos anys a totes les persones
         System.out.println("\n13 - Rejovenir dos anys a totes les persones");
+        List<Persona> llista_persones_anys_menys = new ArrayList<>();
+        llista_persones.stream()
+                        .map(p -> p.getDataNaixament().minusYears(2))
+                                .forEach(llista_persones_anys_menys.add());
         llista_persones.forEach(p -> System.out.println(p.getDataNaixament().minusYears(2)));
 
 
