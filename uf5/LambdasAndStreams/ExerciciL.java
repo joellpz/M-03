@@ -1,8 +1,12 @@
 package uf5.LambdasAndStreams;
 
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Stream;
 
 public class ExerciciL {
 
@@ -97,22 +101,54 @@ public class ExerciciL {
                 15 anys -> 1
 
          */
+        System.out.println("---- 7 ----");
+        int edat;
+        Map<Integer, Integer> mapPersonesEdat = new HashMap<>();
+        llista_persones.forEach(persona -> {
+            mapPersonesEdat.computeIfPresent(persona.getAge(), (k, v) -> v+1);
+            mapPersonesEdat.putIfAbsent(persona.getAge(), 1);
+        });
+
+        /*for (Persona p: llista_persones) {
+            edat = (int) ChronoUnit.YEARS.between(p.getDataNaixament(),LocalDate.now());
+            if (!mapPersonesEdat.containsKey(edat)){
+                mapPersonesEdat.put(edat, 1);
+            }else{
+                mapPersonesEdat.put(edat,mapPersonesEdat.get(edat)+1);
+                System.out.println("SUMAT a " + edat +" -->" + mapPersonesEdat.get(edat));
+            }
+        }*/
+        mapPersonesEdat.forEach((key, value) -> System.out.println(key + " anys --> " + value));
 
         // 8 - llistat de persones DONA amb lambda (stream)
+        System.out.println("--- 8 ---");
+        llista_persones.stream()
+                .filter(p -> p.getGenere()== Persona.Genere.DONA)
+                .forEach(System.out::println);
 
         // 9 - Llistat dels dos HOMES més joves (stream)
-
+        System.out.println("--- 9 ---");
+        llista_persones.stream().filter(p -> p.getGenere()== Persona.Genere.HOME)
+                .sorted(Comparator.comparingInt(Persona::getAge))
+                .limit(2)
+                .forEach(System.out::println);
         // 10- Esborrar (no filtrar o imprimir) del llistat les persones entre 30 i 40 anys (amb lambda)
+        System.out.println("--- 10 ---");
+        llista_persones.removeIf(persona -> persona.getAge() < 40 && persona.getAge() > 30);
+        llista_persones.forEach(System.out::println);
 
         // 11 - Persones que tinguin una 'a' al seu nom
         System.out.println("\n11 Amb una 'A'");
+        llista_persones.forEach(persona -> System.out.println(persona.getNom().contains("a")));
 
         //12 - Llistat de les dates de naixament + dos dies
         System.out.println("\n12 - dates amb dos dies més");
 
+        llista_persones.forEach(p -> System.out.println(p.getDataNaixament().plusDays(2)));
 
         //13 - Rejovenir dos anys a totes les persones
         System.out.println("\n13 - Rejovenir dos anys a totes les persones");
+        llista_persones.forEach(p -> System.out.println(p.getDataNaixament().minusYears(2)));
 
 
     }
