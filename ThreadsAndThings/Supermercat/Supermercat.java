@@ -1,4 +1,4 @@
-package Supermercat;
+package ThreadsAndThings.Supermercat;
 
 import java.util.ArrayList;
 import java.util.List;

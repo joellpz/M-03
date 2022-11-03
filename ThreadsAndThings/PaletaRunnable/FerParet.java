@@ -1,4 +1,4 @@
-package PaletaRunnable;
+package ThreadsAndThings.PaletaRunnable;
 
 import java.util.ArrayList;
 import java.util.List;

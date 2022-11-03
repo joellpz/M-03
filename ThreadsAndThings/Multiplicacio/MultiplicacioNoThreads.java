@@ -1,4 +1,4 @@
-package Multiplicacio;
+package ThreadsAndThings.Multiplicacio;
 
 import java.util.concurrent.Callable;
 

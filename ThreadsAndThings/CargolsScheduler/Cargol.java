@@ -1,4 +1,4 @@
-package CargolsScheduler;
+package ThreadsAndThings.CargolsScheduler;
 
 public class Cargol implements Runnable {
     private final String Nom;

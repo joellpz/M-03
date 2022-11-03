@@ -1,4 +1,4 @@
-package PaletaRunnable;
+package ThreadsAndThings.PaletaRunnable;
 
 public class Paleta implements Runnable {
      String name;

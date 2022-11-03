@@ -1,4 +1,4 @@
-package Multiplicacio;
+package ThreadsAndThings.Multiplicacio;
 
 import java.util.ArrayList;
 import java.util.List;

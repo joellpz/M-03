@@ -1,4 +1,4 @@
-package CargolsScheduler;
+package ThreadsAndThings.CargolsScheduler;
 
 
 public class MonitorCargols implements Runnable {

@@ -1,4 +1,4 @@
-package CargolsScheduler;
+package ThreadsAndThings.CargolsScheduler;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
