@@ -1,12 +1,9 @@
 package uf5.LambdasAndStreams;
 
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
-import java.util.stream.Stream;
+import java.util.stream.Collectors;
 
 public class ExerciciL {
 
@@ -102,7 +99,7 @@ public class ExerciciL {
 
          */
         System.out.println("---- 7 ----");
-        int edat;
+        //int edat;
         Map<Integer, Integer> mapPersonesEdat = new HashMap<>();
         llista_persones.forEach(persona -> {
             mapPersonesEdat.computeIfPresent(persona.getAge(), (k, v) -> v+1);
@@ -154,11 +151,13 @@ public class ExerciciL {
 
         //13 - Rejovenir dos anys a totes les persones
         System.out.println("\n13 - Rejovenir dos anys a totes les persones");
-        List<Persona> llista_persones_anys_menys = new ArrayList<>();
-        llista_persones.stream()
-                        .map(p -> p.getDataNaixament().minusYears(2))
-                                .forEach(llista_persones_anys_menys.add());
-        llista_persones.forEach(p -> System.out.println(p.getDataNaixament().minusYears(2)));
+        List<Persona> llista_persones_anys_menys = llista_persones.stream()
+                .map(p -> new Persona(p.getNom(), p.getGenere(), p.getDataNaixament().plusYears(2)))
+                .toList();
+
+        llista_persones.forEach(System.out::println);
+        System.out.println();
+        llista_persones_anys_menys.forEach(System.out::println);
 
 
     }
