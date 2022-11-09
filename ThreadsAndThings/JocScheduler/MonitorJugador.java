@@ -1,6 +1,6 @@
 package ThreadsAndThings.JocScheduler;
 
-public class MonitorJugador implements Runnable{
+public class MonitorJugador implements Runnable {
     private final Jugador jugador;
 
     public MonitorJugador(Jugador jugador) {
@@ -9,7 +9,7 @@ public class MonitorJugador implements Runnable{
 
     @Override
     public void run() {
-        System.out.println(" -- Actualment el " + jugador.getNom() +" te "
-                + jugador.getPunts()+" punts -- ");
+        System.out.println(" -- Actualment el " + jugador.getNom() + " te "
+                + jugador.getPunts() + " punts -- ");
     }
 }
