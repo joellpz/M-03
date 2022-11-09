@@ -1,6 +1,7 @@
 package uf5.RegExC;
 
 import java.io.*;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -16,41 +17,44 @@ public class PapaNoel {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader("uf5/RegExC/santako.txt"));
-
-        while ((line = br.readLine()) != null) {
-            regexFind();
-            stringFind();
-        }
+        br.mark(0);
+        regexFind(br);
+        br.reset();
+        stringFind(br);
         br.close();
-
     }
 
-    public static void regexFind(){
-        for (int i = 0; i < values.length; i++) {
-            cont = 0;
-            Pattern P = Pattern.compile(regex[i]);
-            Matcher m = P.matcher(line);
-            while (m.find()) {
-                cont++;
+    public static void regexFind(BufferedReader br) throws IOException {
+        while ((line = br.readLine()) != null) {
+
+            for (int i = 0; i < values.length; i++) {
+                cont = 0;
+                Pattern P = Pattern.compile(regex[i]);
+                Matcher m = P.matcher(line);
+                while (m.find()) {
+                    cont++;
+                }
+                if (values[i].equals("Follet")) cont -= reps.get("Papa Noel");
+                reps.put(values[i], cont);
             }
-            if (values[i].equals("Follet")) cont -= reps.get("Papa Noel");
-            reps.put(values[i], cont);
+            reps.forEach((k, v) -> {
+                if (v != 0) {
+                    System.out.print(k + "(" + v + ")" + " ");
+                }
+            });
+            System.out.println();
         }
-        reps.forEach((k, v) -> {
-            if (v != 0) {
-                System.out.print(k + "(" + v + ")" + " ");
-            }
-        });
-        System.out.println();
     }
 
-    public static void stringFind(){
-        for (int i = 0; i < values.length; i++) {
-            cont = 0;
-            for (int j = 0; j < line.split(regex[i]).length; j++) {
-                System.out.println();
+    public static void stringFind(BufferedReader br) throws IOException {
+        String lineCP = line;
+        while ((line = br.readLine()) != null) {
+            for (int i = 0; i < values.length; i++) {
+                cont = 0;
+                //while(lineCP.contains(regex[i])){
+                System.out.println(lineCP.indexOf(regex[i]));
+                //}
             }
-            ;
         }
     }
 }
