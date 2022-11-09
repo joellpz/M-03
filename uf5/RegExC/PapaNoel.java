@@ -21,13 +21,14 @@ public class PapaNoel {
         BufferedReader br_regex = new BufferedReader(new FileReader("uf5/RegExC/santako.txt"));
         BufferedReader br_string = new BufferedReader(new FileReader("uf5/RegExC/santako.txt"));
         regexFind(br_regex);
-        System.out.println("\nWith Strings_");
+
         stringFind(br_string);
         br_regex.close();
         br_string.close();
     }
 
     public static void regexFind(BufferedReader br) throws IOException {
+        System.out.println("\n--- With RegEX: ---");
         while ((line = br.readLine()) != null) {
 
             for (int i = 0; i < values.length; i++) {
@@ -51,6 +52,7 @@ public class PapaNoel {
 
     public static void stringFind(BufferedReader br) throws IOException {
         String lineCP ;
+        System.out.println("\n--- With Strings: ---");
         while ((line = br.readLine()) != null) {
             for (int i = 0; i < values.length; i++) {
                 lineCP = line;
