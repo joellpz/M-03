@@ -21,7 +21,7 @@ public class PapaNoel {
         BufferedReader br_regex = new BufferedReader(new FileReader("uf5/RegExC/santako.txt"));
         BufferedReader br_string = new BufferedReader(new FileReader("uf5/RegExC/santako.txt"));
         regexFind(br_regex);
-        System.out.println("------------");
+        System.out.println("\nWith Strings_");
         stringFind(br_string);
         br_regex.close();
         br_string.close();
