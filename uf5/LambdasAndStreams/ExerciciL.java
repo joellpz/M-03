@@ -9,22 +9,22 @@ public class ExerciciL {
 
     public static void main(String[] args) {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("d/MM/yyy");
-        Persona p1 = new Persona("Arya", Persona.Genere.DONA, LocalDate.parse("25/12/2002",format) );
-        Persona p2 = new Persona("Tyrion", Persona.Genere.HOME, LocalDate.parse("12/10/1980",format));
-        Persona p3 = new Persona("Cersei", Persona.Genere.DONA, LocalDate.parse("10/01/1984",format));
-        Persona p4 = new Persona("Eddard", Persona.Genere.HOME, LocalDate.parse("24/04/1974",format));
-        Persona p5 = new Persona("Sansa", Persona.Genere.DONA, LocalDate.parse("24/04/1992",format));
-        Persona p6 = new Persona("Jaime", Persona.Genere.HOME, LocalDate.parse("24/04/1979",format));
-        Persona p7 = new Persona("Khal", Persona.Genere.HOME, LocalDate.parse("10/08/1979",format));
-        Persona p8 = new Persona("Daenerys", Persona.Genere.DONA, LocalDate.parse("12/11/1992",format));
-        Persona p9 = new Persona("Davos", Persona.Genere.HOME, LocalDate.parse("12/11/1965",format));
-        Persona p10 = new Persona("Jon Neu", Persona.Genere.HOME, LocalDate.parse("12/11/1986",format));
-        Persona p11 = new Persona("Brienne", Persona.Genere.DONA, LocalDate.parse("12/11/1989",format));
+        Persona p1 = new Persona("Arya", Persona.Genere.DONA, LocalDate.parse("25/12/2002", format));
+        Persona p2 = new Persona("Tyrion", Persona.Genere.HOME, LocalDate.parse("12/10/1980", format));
+        Persona p3 = new Persona("Cersei", Persona.Genere.DONA, LocalDate.parse("10/01/1984", format));
+        Persona p4 = new Persona("Eddard", Persona.Genere.HOME, LocalDate.parse("24/04/1974", format));
+        Persona p5 = new Persona("Sansa", Persona.Genere.DONA, LocalDate.parse("24/04/1992", format));
+        Persona p6 = new Persona("Jaime", Persona.Genere.HOME, LocalDate.parse("24/04/1979", format));
+        Persona p7 = new Persona("Khal", Persona.Genere.HOME, LocalDate.parse("10/08/1979", format));
+        Persona p8 = new Persona("Daenerys", Persona.Genere.DONA, LocalDate.parse("12/11/1992", format));
+        Persona p9 = new Persona("Davos", Persona.Genere.HOME, LocalDate.parse("12/11/1965", format));
+        Persona p10 = new Persona("Jon Neu", Persona.Genere.HOME, LocalDate.parse("12/11/1986", format));
+        Persona p11 = new Persona("Brienne", Persona.Genere.DONA, LocalDate.parse("12/11/1989", format));
 
-        Persona[] lpers = {p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11};
+        Persona[] lpers = {p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11};
         List<Persona> llista_persones;
         llista_persones = new ArrayList<>(Arrays.asList(lpers));
-        Map<Integer,Integer> mapPersones = new HashMap<>();
+        Map<Integer, Integer> mapPersones = new HashMap<>();
 
         // 1 - Canviar a lambda
         System.out.println("\n1-2");
@@ -58,7 +58,7 @@ public class ExerciciL {
 
 
         // 5 - Omplir map. Canviar per un forEach amb lambda
-        llista_persones.forEach(persona -> mapPersones.put(persona.getAge(),1));
+        llista_persones.forEach(persona -> mapPersones.put(persona.getAge(), 1));
 
         /*for(uf5.LambdasAndStreams.Persona per : llista_persones) {
             mapPersones.put(per.getAge(),1);
@@ -66,7 +66,7 @@ public class ExerciciL {
 
         // 6 - Canvia per un recorregut forEach amb lambda
         System.out.println("\n5");
-        mapPersones.forEach((key,value) -> System.out.println(key + ":" + value));
+        mapPersones.forEach((key, value) -> System.out.println(key + ":" + value));
 
         /*mapPersones.entrySet().forEach(integerIntegerEntry -> {
             System.out.println(integerIntegerEntry.getKey() + " : " + integerIntegerEntry.getValue());
@@ -102,7 +102,7 @@ public class ExerciciL {
         //int edat;
         Map<Integer, Integer> mapPersonesEdat = new HashMap<>();
         llista_persones.forEach(persona -> {
-            mapPersonesEdat.computeIfPresent(persona.getAge(), (k, v) -> v+1);
+            mapPersonesEdat.computeIfPresent(persona.getAge(), (k, v) -> v + 1);
             mapPersonesEdat.putIfAbsent(persona.getAge(), 1);
         });
 
@@ -120,12 +120,12 @@ public class ExerciciL {
         // 8 - llistat de persones DONA amb lambda (stream)
         System.out.println("--- 8 ---");
         llista_persones.stream()
-                .filter(p -> p.getGenere()== Persona.Genere.DONA)
+                .filter(p -> p.getGenere() == Persona.Genere.DONA)
                 .forEach(System.out::println);
 
         // 9 - Llistat dels dos HOMES més joves (stream)
         System.out.println("--- 9 ---");
-        llista_persones.stream().filter(p -> p.getGenere()== Persona.Genere.HOME)
+        llista_persones.stream().filter(p -> p.getGenere() == Persona.Genere.HOME)
                 .sorted(Comparator.comparingInt(Persona::getAge))
                 .limit(2)
                 .forEach(System.out::println);
@@ -137,8 +137,8 @@ public class ExerciciL {
         // 11 - Persones que tinguin una 'a' al seu nom
         System.out.println("\n11 Amb una 'A'");
         llista_persones.stream()
-                        .filter(persona -> persona.getNom().contains("a"))
-                        .forEach(System.out::println);
+                .filter(persona -> persona.getNom().contains("a"))
+                .forEach(System.out::println);
         //llista_persones.forEach(persona -> System.out.println(persona.getNom().contains("a")));
 
         //12 - Llistat de les dates de naixament + dos dies
@@ -151,15 +151,10 @@ public class ExerciciL {
 
         //13 - Rejovenir dos anys a totes les persones
         System.out.println("\n13 - Rejovenir dos anys a totes les persones");
-        List<Persona> llista_persones_anys_menys = llista_persones.stream()
-                .map(p -> new Persona(p.getNom(), p.getGenere(), p.getDataNaixament().plusYears(2)))
-                .toList();
-
-        llista_persones.forEach(System.out::println);
-        System.out.println();
-        llista_persones_anys_menys.forEach(System.out::println);
-
-
+        llista_persones.forEach(p -> {
+            p.setDataNaixament(p.getDataNaixament().plusYears(2));
+            System.out.println(p);
+        });
     }
 
 
