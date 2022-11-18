@@ -4,7 +4,7 @@ import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
 
 public class FibonacciTask extends RecursiveTask<Long> {
-    private int n;
+    private final int n;
     private static final int LLINDAR = 5;
 
     public FibonacciTask(int n) {
