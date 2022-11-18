@@ -12,9 +12,13 @@ public class FibonacciTask extends RecursiveTask<Long> {
     }
 
     public Long fibonacciR() {
-        FibonacciTask ft = new FibonacciTask(n-1);
-        ft.fork();
-        return ft.join() * n;
+        //System.out.println("rec" + n);
+        if (n <= 1)  return (long) n;
+        FibonacciTask f1 = new FibonacciTask(n - 1);
+        f1.fork();
+        FibonacciTask f2 = new FibonacciTask(n - 2);
+        f2.fork();
+        return f2.join() + f1.join();
     }
 
     public Long fibonacciS() {
@@ -36,7 +40,7 @@ public class FibonacciTask extends RecursiveTask<Long> {
 
     public static void main(String[] args) {
         ForkJoinPool pool = new ForkJoinPool();
-        FibonacciTask ft = new FibonacciTask(14);
+        FibonacciTask ft = new FibonacciTask(5);
         pool.invoke(ft);
         Long result2 = ft.join();
         System.out.println(result2);
