@@ -11,13 +11,13 @@ public class FibonacciTask extends RecursiveTask<Long> {
         this.n = n;
     }
 
-    private Long fibonacciR(int n) {
+    public Long fibonacciR() {
         FibonacciTask ft = new FibonacciTask(n-1);
         ft.fork();
         return ft.join() * n;
     }
 
-    private static Long fibonacciS(int n) {
+    public Long fibonacciS() {
         long prev1=0, prev2=1;
         for(int i=0; i<n; i++) {
             long savePrev1 = prev1;
@@ -30,8 +30,8 @@ public class FibonacciTask extends RecursiveTask<Long> {
     @Override
     protected Long compute() {
         if(n > LLINDAR) {
-            return fibonacciR(n);
-        }else return fibonacciS(n);
+            return fibonacciR();
+        }else return fibonacciS();
     }
 
     public static void main(String[] args) {
