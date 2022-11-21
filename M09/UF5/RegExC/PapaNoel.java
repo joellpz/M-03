@@ -1,4 +1,4 @@
-package uf5.RegExC;
+package M09.UF5.RegExC;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -18,8 +18,8 @@ public class PapaNoel {
 
 
     public static void main(String[] args) throws IOException {
-        BufferedReader br_regex = new BufferedReader(new FileReader("uf5/RegExC/santako.txt"));
-        BufferedReader br_string = new BufferedReader(new FileReader("uf5/RegExC/santako.txt"));
+        BufferedReader br_regex = new BufferedReader(new FileReader("M09/UF5/RegExC/santako.txt"));
+        BufferedReader br_string = new BufferedReader(new FileReader("M09/UF5/RegExC/santako.txt"));
         regexFind(br_regex);
 
         stringFind(br_string);

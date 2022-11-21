@@ -1,9 +1,8 @@
-package uf5.LambdasAndStreams;
+package M09.UF5.LambdasAndStreams;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class ExerciciL {
 

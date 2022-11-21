@@ -1,4 +1,4 @@
-package uf5.LambdasAndStreams;
+package M09.UF5.LambdasAndStreams;
 
 public class Cotxe {
     String marca;

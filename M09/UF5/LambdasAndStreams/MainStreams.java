@@ -1,4 +1,4 @@
-package uf5.LambdasAndStreams;
+package M09.UF5.LambdasAndStreams;
 
 import java.util.Arrays;
 import java.util.Comparator;

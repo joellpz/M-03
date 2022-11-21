@@ -1,30 +1,26 @@
-package uf5.LambdasAndStreams;
+package M09.UF5.Exceptions;
 
 import java.time.LocalDate;
 import java.time.Period;
 
-public class Persona implements Comparable<Persona> {
-    @Override
-    public int compareTo(Persona o) {
-        if(getAge() > o.getAge()) return -1;
-        else if(getAge() < o.getAge()) return 1;
-        else return 0;
-    }
-
+public class Person  {
     public enum Genere {
         HOME,DONA
     }
+    public final String MSG_ERROR_DATA = "La data de naixament no potser posterior a la data d'avui";
     private String nom;
     private Genere genere;
     private LocalDate dataNaixament;
-    private Cotxe cotxe;
 
-    public Persona(String nom, Genere genere, LocalDate dataNaixament) {
+
+    public Person(String nom, Genere genere, LocalDate dataNaixament) throws PersonNotBornException{
         this.nom = nom;
         this.genere = genere;
-        this.dataNaixament = dataNaixament;
-        cotxe = null;
+        if (dataNaixament.isAfter(LocalDate.now())){
+            throw new PersonNotBornException(MSG_ERROR_DATA);
+        }else this.dataNaixament = dataNaixament;
     }
+
     public String getNom() {
         return nom;
     }
@@ -40,8 +36,10 @@ public class Persona implements Comparable<Persona> {
     public LocalDate getDataNaixament() {
         return dataNaixament;
     }
-    public void setDataNaixament(LocalDate dataNaixament) {
-        this.dataNaixament = dataNaixament;
+    public void setDataNaixament(LocalDate dataNaixament) throws PersonNotBornException{
+        if (dataNaixament.isAfter(LocalDate.now())){
+            throw new PersonNotBornException(MSG_ERROR_DATA);
+        }else this.dataNaixament = dataNaixament;
     }
 
     /*
@@ -56,25 +54,10 @@ public class Persona implements Comparable<Persona> {
         }
     }
 
-    public void setCotxe(Cotxe c) {
-        cotxe = c;
-    }
-    public Cotxe getCotxe() {
-        if(cotxe == null) try {
-            throw new Exception(nom + " no té cotxe");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return cotxe;
-    }
-
     @Override
     public String toString() {
         return nom + '\t' + genere.toString() + '\t' + getAge();
     }
 
 
-
 }
-
-
