@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
-    <artifactId>AddressApp</artifactId>
+    <artifactId>FallingFood</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>AddressApp</name>
+    <name>FallingFood</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -40,7 +40,7 @@
         </dependency>
     </dependencies>
 
-    <build>ch.makery.address
+    <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -60,7 +60,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>ch.makery.address/ch.makery.address.MainApp</mainClass>
+                            <mainClass>com.example.fallingfood/com.example.fallingfood.HelloApplication</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>
