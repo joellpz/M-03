@@ -3,41 +3,57 @@ package com.example.fallingfood.Sprites;
 import com.example.fallingfood.FallingFoodApplication;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.PixelReader;
+import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 public class Fruta extends ImageView {
 
-    private Circle forma;
     private double velocidad;
-    private double puntos;
+    private int puntos;
     private Image imagen;
-    private boolean recogida;
     private FoodType tipoFruta;
 
+    private boolean recogida;
+
+    private ImageView shape;
+
     //Constructor
-    public Fruta(FoodType tipoFruta, double velocidad, double puntos, Image imagen,double radio) {
-        this.forma = new Circle(radio);
+    public Fruta(FoodType tipoFruta, double velocidad, int puntos, Image imagen) {
         this.tipoFruta = tipoFruta;
         this.velocidad = velocidad;
         this.puntos = puntos;
         this.imagen = imagen;
-        this.recogida = false;
         setImage(imagen);
     }
 
-    public Fruta(double puntos, double velocidad) {
-        this.forma = new Circle(20);
-        forma.setTranslateY(-100);
-        forma.setTranslateX((int)(Math.random() * 700 + 50));
-        this.forma.setStrokeWidth(5);
-        this.forma.setStroke(Color.BLACK);
+    public Fruta(int puntos, double velocidad) {
         this.tipoFruta = randomFoodType();
         this.velocidad = velocidad;
         this.puntos = puntos;
         setImage();
-        this.recogida = false;
         setImage(imagen);
+        setX(Math.random()*FallingFoodApplication.width);
+        this.recogida = false;
+    }
+
+    public ImageView makeHitbox(){
+        int width = (int) imagen.getWidth();
+        int height = (int) imagen.getHeight();
+
+        WritableImage wImage = new WritableImage(width, height);
+        PixelReader reader = imagen.getPixelReader();
+
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                Color color = reader.getColor(x, y);
+                if (color.getOpacity() > 0) {
+                    wImage.getPixelWriter().setColor(x, y, Color.WHITE);
+                }
+            }
+        }
+        return new ImageView(wImage);
     }
 
     //Getters y Setters
@@ -47,10 +63,10 @@ public class Fruta extends ImageView {
     public void setVelocidad(double velocidad) {
         this.velocidad = velocidad;
     }
-    public double getPuntos() {
+    public int getPuntos() {
         return puntos;
     }
-    public void setPuntos(double puntos) {
+    public void setPuntos(int puntos) {
         this.puntos = puntos;
     }
     public Image getImagen() {
@@ -59,12 +75,6 @@ public class Fruta extends ImageView {
     public void setImagen(Image imagen) {
         this.imagen = imagen;
     }
-    public boolean isRecogida() {
-        return recogida;
-    }
-    public void setRecogida(boolean recogida) {
-        this.recogida = recogida;
-    }
     public FoodType getTipoFruta() {
         return tipoFruta;
     }
@@ -72,10 +82,13 @@ public class Fruta extends ImageView {
         this.tipoFruta = tipoFruta;
     }
 
-    public Circle getForma() {
-        return forma;
+    public void setRecogida(boolean recogida) {
+        this.recogida = recogida;
     }
 
+    public boolean isRecogida() {
+        return recogida;
+    }
 
     private FoodType randomFoodType() {
         switch ((int) ((Math.random() * 6) + 1)) {
