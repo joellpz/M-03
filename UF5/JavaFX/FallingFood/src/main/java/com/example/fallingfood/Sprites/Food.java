@@ -1,24 +1,79 @@
 package com.example.fallingfood.Sprites;
 
-import com.example.fallingfood.HelloApplication;
+import com.example.fallingfood.FallingFoodApplication;
+import com.example.fallingfood.FallingFoodController;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.PixelReader;
+import javafx.scene.image.WritableImage;
+import javafx.scene.paint.Color;
 
-public class Food extends Sprite {
+import java.util.Objects;
 
-    private int points;
-    private FoodType type;
-    Image image;
+public class Food extends ImageView {
 
-    public Food(int points, FoodType type) {
-        this.points = points;
-        this.type = type;
-        setImage();
+    private final double velocidad;
+    private final int puntos;
+    private Image imagen;
+    private final FoodType tipoFruta;
+
+    private boolean recogida;
+    private boolean isBomb;
+
+    public Food(int puntos, double velocidad, boolean isBomb) {
+        this.tipoFruta = randomFoodType();
+        this.velocidad = velocidad;
+        this.puntos = puntos;
+        this.isBomb = isBomb;
+        if (isBomb){
+            setImage(new Image(Objects.requireNonNull(FallingFoodApplication.class.getResource("food/bomb.png")).toExternalForm()));
+        }else{
+            setImageType();
+            setImage(imagen);
+        }
+        setX(Math.random()* FallingFoodController.root.getWidth()-20);
+        this.recogida = false;
     }
 
-    public Food(int points) {
-        this.points = points;
-        this.type = randomFoodType();
-        setImage();
+    public ImageView makeHitbox(){
+        int width = (int) imagen.getWidth();
+        int height = (int) imagen.getHeight();
+
+        WritableImage wImage = new WritableImage(width, height);
+        PixelReader reader = imagen.getPixelReader();
+
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                Color color = reader.getColor(x, y);
+                if (color.getOpacity() > 0) {
+                    wImage.getPixelWriter().setColor(x, y, Color.WHITE);
+                }
+            }
+        }
+        return new ImageView(wImage);
+    }
+
+    //Getters y Setters
+
+
+    public boolean isBomb() {
+        return isBomb;
+    }
+
+    public int getPuntos() {
+        return puntos;
+    }
+
+    public FoodType getTipoFruta() {
+        return tipoFruta;
+    }
+
+    public void setRecogida(boolean recogida) {
+        this.recogida = recogida;
+    }
+
+    public boolean isRecogida() {
+        return recogida;
     }
 
     private FoodType randomFoodType() {
@@ -47,19 +102,19 @@ public class Food extends Sprite {
         }
     }
 
-    public FoodType getType() {
-        return type;
+    public void setImageType() {
+        switch (getTipoFruta()) {
+            case CEREZA -> this.imagen = new Image(Objects.requireNonNull(FallingFoodApplication.class.getResource("food/cereza.png")).toExternalForm());
+            case ENSALADA -> this.imagen = new Image(Objects.requireNonNull(FallingFoodApplication.class.getResource("food/ensalada.png")).toExternalForm());
+            case FRESA -> this.imagen = new Image(Objects.requireNonNull(FallingFoodApplication.class.getResource("food/fresa.png")).toExternalForm());
+            case JAMON -> this.imagen = new Image(Objects.requireNonNull(FallingFoodApplication.class.getResource("food/jamon.png")).toExternalForm());
+            case PIZZA -> this.imagen = new Image(Objects.requireNonNull(FallingFoodApplication.class.getResource("food/pizza.png")).toExternalForm());
+            case WRAP -> this.imagen = new Image(Objects.requireNonNull(FallingFoodApplication.class.getResource("food/wrap.png")).toExternalForm());
+        }
     }
 
-    public void setImage() {
-        System.out.println(Food.class.getResource("cereza.png").toExternalForm());
-        switch (getType()) {
-            case CEREZA -> this.image = new Image(Food.class.getResource("cereza.png").toExternalForm());
-            case ENSALADA -> this.image = new Image(Food.class.getResource("ensalada.png").toExternalForm());
-            case FRESA -> this.image = new Image(Food.class.getResource("fresa.png").toExternalForm());
-            case JAMON -> this.image = new Image(Food.class.getResource("jamon.png").toExternalForm());
-            case PIZZA -> this.image = new Image(Food.class.getResource("pizza.png").toExternalForm());
-            case WRAP -> this.image = new Image(Food.class.getResource("wrap.png").toExternalForm());
-        }
+    //Método para actualizar la posición de la fruta
+    public void moverFruta() {
+        setY(getY() + velocidad);
     }
 }

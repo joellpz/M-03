@@ -1,19 +1,15 @@
 package com.example.fallingfood.Sprites;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCode;
-
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 
 public class Farmer extends ImageView {
     private double velocidad;
-    private Image imagen;
-    Rectangle border = new Rectangle();
+    private final Image imagen;
 
     private int score;
 
@@ -32,13 +28,8 @@ public class Farmer extends ImageView {
     public void setVelocidad(double velocidad) {
         this.velocidad = velocidad;
     }
-    public Image getImagen() {
-        return imagen;
-    }
-    public void setImagen(Image imagen) {
-        this.imagen = imagen;
-    }
 
+    //Funcion que permite redcuir la HitBox a unicamente los pixeles de color. No acabo de funcionar pero por aqui la dejo.
     public ImageView makeHitbox(){
         int width = (int) imagen.getWidth();
         int height = (int) imagen.getHeight();
@@ -65,6 +56,9 @@ public class Farmer extends ImageView {
         return score;
     }
 
+    public void setScore(int score) {
+        this.score = score;
+    }
     //    public Rectangle getBorderShape(){
 //        border.setX(shape.getBoundsInParent().getMinX());
 //        border.setY(shape.getBoundsInParent().getMinY());

@@ -1,34 +1,32 @@
 package com.example.fallingfood;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.example.fallingfood.Sprites.Farmer;
-import com.example.fallingfood.Sprites.Fruta;
+import com.example.fallingfood.Sprites.Food;
 import javafx.animation.AnimationTimer;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
+import javafx.geometry.Side;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-public class FallingFoodController {
-    private List<Fruta> frutas = new ArrayList<>();
-    private Farmer farmer;
-    private Group root = new Group();
-    private HBox hbBoton = new HBox();
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
-    private Scene scene = new Scene(root, 800, 600, Color.SKYBLUE);
-    private Text pointsText = new Text();
+public class FallingFoodController {
+    private final List<Food> foods = new ArrayList<>();
+    private final Farmer farmer;
+    public static final Pane root = new Pane();
+    private final VBox vBox = new VBox();
+
+    private final Scene scene = new Scene(root, 800, 600, Color.SKYBLUE);
+    private final Text pointsText = new Text();
     private int level = 1;
     private boolean started = false;
 
@@ -37,47 +35,55 @@ public class FallingFoodController {
     Text levelText = new Text("Level " + level);
 
     public FallingFoodController() {
-        this.farmer = new Farmer(5, new Image(FallingFoodController.class.getResource("cesta.png").toExternalForm()));
-        farmer.setX(400);
-        farmer.setY(450);
+        this.farmer = new Farmer(5, new Image(Objects.requireNonNull(FallingFoodController.class.getResource("cesta.png")).toExternalForm()));
+        farmer.setX(root.getWidth()/2);
+        farmer.setY(root.getHeight()-90);
         inicializarGUI();
+    }
+    private void vBoxPropieties(){
+        vBox.setAlignment(Pos.CENTER);
+        levelText.setFont(Font.font( "Helvetica", FontWeight.BOLD, 16));
+        vBox.getChildren().addAll(levelText, btnStart);
+        vBox.setAlignment(Pos.CENTER);
+        vBox.setSpacing(10);
+        vBox.translateXProperty().bind(root.widthProperty().subtract(vBox.widthProperty()).divide(2));
+        vBox.translateYProperty().bind(root.heightProperty().subtract(vBox.heightProperty()).divide(2));
+        btnStart.setText("START");
+        btnStart.setFont(Font.font( "Helvetica", FontWeight.NORMAL, 16));
+        btnStart.setPadding(new Insets(5,10,5,10));
     }
 
     private void inicializarGUI() {
         root.getChildren().add(farmer);
-        hbBoton.setAlignment(Pos.CENTER);
-        hbBoton.getChildren().addAll(levelText, btnStart);
-        hbBoton.setAlignment(Pos.CENTER);
-        hbBoton.setSpacing(10);
-        hbBoton.setLayoutX(scene.getWidth()/2 - hbBoton.getWidth());
-        hbBoton.setLayoutY(scene.getHeight()/2 - hbBoton.getHeight());
-        btnStart.setText("START");
-        btnStart.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                started = true;
-                jugar();
-                hbBoton.setVisible(false);
-            }
+
+        root.setBackground(new Background(new BackgroundImage((new Image(Objects.requireNonNull(getClass().getResource("grass.png")).toExternalForm())), BackgroundRepeat.SPACE, BackgroundRepeat.NO_REPEAT, new BackgroundPosition(Side.RIGHT,0,false,Side.BOTTOM,0,false),  new BackgroundSize(100, 100, true, true, true, false))));
+        vBoxPropieties();
+        btnStart.setOnAction(event -> {
+            started = true;
+            jugar();
+            vBox.setVisible(false);
         });
         pointsText.setText("Points: " + farmer.getScore());
-        pointsText.setFont(Font.font( "Helvetica", FontWeight.BOLD, 24 ));
-        pointsText.setStroke(Color.WHITE);
+        pointsText.setFont(Font.font( "Helvetica", FontWeight.BOLD, 24));
+        pointsText.setFill(Color.WHITE);
         pointsText.setY(20);
-        root.getChildren().addAll(hbBoton, pointsText);
+        root.getChildren().addAll(vBox, pointsText);
     }
 
-    private void newLevel(){
+    private void newLevel(boolean failed){
         level++;
-        levelText.setText("Level " + level);
-        hbBoton.setVisible(true);
-        btnStart.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                started = true;
-                jugar();
-                hbBoton.setVisible(false);
-            }
+        if (failed){
+            level=0;
+            levelText.setText("Has Perdido! Has acumulado " + farmer.getScore() + " puntos.");
+            farmer.setScore(0);
+        }else{
+            levelText.setText("Level " + level);
+        }
+        vBox.setVisible(true);
+        btnStart.setOnAction(event -> {
+            started = true;
+            jugar();
+            vBox.setVisible(false);
         });
     }
 
@@ -92,56 +98,56 @@ public class FallingFoodController {
             @Override
             public void handle(long now) {
                 if (started) {
-                    for (Fruta fruta : frutas) {
-                        fruta.moverFruta();
-                        comprobarColisiones(fruta);
+                    for (Food food : foods) {
+                        food.moverFruta();
+                        comprobarColisiones(food);
                     }
                     if (comprobarFinNivel()) {
-                        //started = false;
+                        animationTimer.stop();
+                        newLevel(false);
                     }
                 }
             }
         };
         animationTimer.start();
 
-        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                farmer.moverFarmer(event.getCode());
-            }
-        });
+        scene.setOnKeyPressed(event -> farmer.moverFarmer(event.getCode()));
     }
 
     private boolean comprobarFinNivel() {
-        for (Fruta fruta : frutas) {
-            if (fruta.getBoundsInParent().intersects(0, 0, scene.getWidth(), scene.getHeight())) {
+        for (Food food : foods) {
+            if (food.getBoundsInParent().intersects(0, 0, scene.getWidth(), scene.getHeight())) {
                 return false;
             }
         }
-        animationTimer.stop();
-        newLevel();
         return true;
     }
 
-
     private void agregarFrutas() {
-        frutas.clear();
+        foods.clear();
         for (int i = 0; i < level; i++) {
-            frutas.add(new Fruta(10, level));
-            frutas.add(new Fruta(20, 1.2 * level));
-            frutas.add(new Fruta(20, 1.5 * level));
+            foods.add(new Food(10, level,false));
+            foods.add(new Food(20, 1.2 * level,false));
+            foods.add(new Food(20, 1.2 * level,true));
+            foods.add(new Food(20, 1.5 * level,false));
         }
-        root.getChildren().addAll(frutas);
+        root.getChildren().addAll(foods);
     }
 
     //Detectar si una fruta toca con el agricultor
-    private void comprobarColisiones(Fruta fruta) {
-        if (fruta.getBoundsInParent().intersects(farmer.getBoundsInParent()) && !fruta.isRecogida()) {
-            fruta.setVisible(false);
-            fruta.setRecogida(true);
-            farmer.plusScore(fruta.getPuntos());
+    private void comprobarColisiones(Food food) {
+        if (food.getBoundsInParent().intersects(farmer.getBoundsInParent()) && !food.isRecogida()) {
+            if (food.isBomb()) {
+                animationTimer.stop();
+                newLevel(true);
+                root.getChildren().removeAll(foods);
+            }else{
+                food.setVisible(false);
+                food.setRecogida(true);
+                farmer.plusScore(food.getPuntos());
+                foods.remove(food);
+            }
             pointsText.setText("Points: " + farmer.getScore());
-            frutas.remove(fruta);
         }
     }
 }
