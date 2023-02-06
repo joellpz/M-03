@@ -21,6 +21,7 @@ import java.util.Objects;
 
 public class FallingFoodController {
     private final List<Food> foods = new ArrayList<>();
+    private final List<Food> foodsScreen = new ArrayList<>();
     private final Farmer farmer;
     public static final Pane root = new Pane();
     private final VBox vBox = new VBox();
@@ -36,27 +37,28 @@ public class FallingFoodController {
 
     public FallingFoodController() {
         this.farmer = new Farmer(5, new Image(Objects.requireNonNull(FallingFoodController.class.getResource("cesta.png")).toExternalForm()));
-        farmer.setX(root.getWidth()/2);
-        farmer.setY(root.getHeight()-90);
+        farmer.setX(root.getWidth() / 2);
+        farmer.setY(root.getHeight() - 90);
         inicializarGUI();
     }
-    private void vBoxPropieties(){
+
+    private void vBoxPropieties() {
         vBox.setAlignment(Pos.CENTER);
-        levelText.setFont(Font.font( "Helvetica", FontWeight.BOLD, 16));
+        levelText.setFont(Font.font("Helvetica", FontWeight.BOLD, 16));
         vBox.getChildren().addAll(levelText, btnStart);
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(10);
         vBox.translateXProperty().bind(root.widthProperty().subtract(vBox.widthProperty()).divide(2));
         vBox.translateYProperty().bind(root.heightProperty().subtract(vBox.heightProperty()).divide(2));
         btnStart.setText("START");
-        btnStart.setFont(Font.font( "Helvetica", FontWeight.NORMAL, 16));
-        btnStart.setPadding(new Insets(5,10,5,10));
+        btnStart.setFont(Font.font("Helvetica", FontWeight.NORMAL, 16));
+        btnStart.setPadding(new Insets(5, 10, 5, 10));
     }
 
     private void inicializarGUI() {
         root.getChildren().add(farmer);
 
-        root.setBackground(new Background(new BackgroundImage((new Image(Objects.requireNonNull(getClass().getResource("grass.png")).toExternalForm())), BackgroundRepeat.SPACE, BackgroundRepeat.NO_REPEAT, new BackgroundPosition(Side.RIGHT,0,false,Side.BOTTOM,0,false),  new BackgroundSize(100, 100, true, true, true, false))));
+        root.setBackground(new Background(new BackgroundImage((new Image(Objects.requireNonNull(getClass().getResource("grass.png")).toExternalForm())), BackgroundRepeat.SPACE, BackgroundRepeat.NO_REPEAT, new BackgroundPosition(Side.RIGHT, 0, false, Side.BOTTOM, 0, false), new BackgroundSize(100, 100, true, true, true, false))));
         vBoxPropieties();
         btnStart.setOnAction(event -> {
             started = true;
@@ -64,19 +66,19 @@ public class FallingFoodController {
             vBox.setVisible(false);
         });
         pointsText.setText("Points: " + farmer.getScore());
-        pointsText.setFont(Font.font( "Helvetica", FontWeight.BOLD, 24));
+        pointsText.setFont(Font.font("Helvetica", FontWeight.BOLD, 24));
         pointsText.setFill(Color.WHITE);
         pointsText.setY(20);
         root.getChildren().addAll(vBox, pointsText);
     }
 
-    private void newLevel(boolean failed){
+    private void newLevel(boolean failed) {
         level++;
-        if (failed){
-            level=0;
+        if (failed) {
+            level = 0;
             levelText.setText("Has Perdido! Has acumulado " + farmer.getScore() + " puntos.");
             farmer.setScore(0);
-        }else{
+        } else {
             levelText.setText("Level " + level);
         }
         vBox.setVisible(true);
@@ -92,7 +94,7 @@ public class FallingFoodController {
     }
 
     public void jugar() {
-        farmer.setVelocidad(farmer.getVelocidad()*1.25);
+        farmer.setVelocidad(farmer.getVelocidad() + 0.5 + (level / 10));
         agregarFrutas();
         animationTimer = new AnimationTimer() {
             @Override
@@ -116,21 +118,24 @@ public class FallingFoodController {
 
     private boolean comprobarFinNivel() {
         for (Food food : foods) {
-            if (food.getBoundsInParent().intersects(0, 0, scene.getWidth(), scene.getHeight())) {
+            if (foodsScreen.contains(food) && food.getBoundsInParent().intersects(0, 0, scene.getWidth(), scene.getHeight())) {
                 return false;
             }
         }
+        root.getChildren().removeAll(foods);
         return true;
     }
 
     private void agregarFrutas() {
         foods.clear();
         for (int i = 0; i < level; i++) {
-            foods.add(new Food(10, level,false));
-            foods.add(new Food(20, 1.2 * level,false));
-            foods.add(new Food(20, 1.2 * level,true));
-            foods.add(new Food(20, 1.5 * level,false));
+            foods.add(new Food(10, (0.15 + (level / 10)), false));
+            foods.add(new Food(20, (0.2 + (level / 10)), false));
+            foods.add(new Food(40, (0.2 + (level / 10)), true));
+            foods.add(new Food(50, (0.3 + (level / 10)), false));
         }
+
+        foodsScreen.addAll(foods);
         root.getChildren().addAll(foods);
     }
 
@@ -141,11 +146,11 @@ public class FallingFoodController {
                 animationTimer.stop();
                 newLevel(true);
                 root.getChildren().removeAll(foods);
-            }else{
+            } else {
                 food.setVisible(false);
                 food.setRecogida(true);
                 farmer.plusScore(food.getPuntos());
-                foods.remove(food);
+                foodsScreen.remove(food);
             }
             pointsText.setText("Points: " + farmer.getScore());
         }
