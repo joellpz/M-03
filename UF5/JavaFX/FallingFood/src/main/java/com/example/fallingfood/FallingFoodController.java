@@ -76,6 +76,7 @@ public class FallingFoodController {
         level++;
         if (failed) {
             level = 0;
+            System.out.println(farmer.getScore());
             levelText.setText("Has Perdido! Has acumulado " + farmer.getScore() + " puntos.");
             farmer.setScore(0);
         } else {
