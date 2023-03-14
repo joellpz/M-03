@@ -6,9 +6,9 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class GreetingService {
     RestTemplate restTemplate = new RestTemplate();
-    public ChuckQuote getChuckQuote(){
-        ChuckQuote quote = restTemplate.getForObject(
-					"https://api.chucknorris.io/jokes/random", ChuckQuote.class);
+    public CovidQuote[] getCovidQuote(){
+        CovidQuote[] quote = restTemplate.getForObject(
+					"https://analisi.transparenciacatalunya.cat/resource/623z-r97q.json", CovidQuote[].class);
         return quote;
     }
 }
