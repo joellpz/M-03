@@ -11,9 +11,9 @@ import java.util.Arrays;
 import java.util.List;
 
 @Controller
-@RequestMapping(CovidController.CHUCK)
+@RequestMapping(CovidController.COVID)
 public class CovidController {
-    public static final String CHUCK = "/covid";
+    public static final String COVID = "/covid";
 
     @Autowired
     GreetingService grettingService;
