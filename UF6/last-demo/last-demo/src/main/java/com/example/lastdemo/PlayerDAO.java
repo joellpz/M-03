@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface PersonajeDAO extends JpaRepository<Personaje, Integer> {
-    List<Personaje> findAll();
+public interface PlayerDAO extends JpaRepository<Player, Integer>{
+    List<Player> findAll();
 }
